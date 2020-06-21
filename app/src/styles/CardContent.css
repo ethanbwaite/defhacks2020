@@ -3,41 +3,37 @@
   flex-direction: column;
 }
 
-.card-content > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.card-content > * + * {
-  margin-top: 0.8em;
-}
-
 .place-name {
   font-size: 1.5em;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1ch;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
-hr {
-  color: grey;
-  width: 100%;
-  border: none;
-  border-top: 1px solid;
+.place-photo {
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+  margin: 0%;
+  max-height: 400px;
 }
 
 .place-address {
-  opacity: 0.7;
-  font-size: 0.85em;
-  text-transform: uppercase;
-  letter-spacing: 0.15ch;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
 .place-rating {
-  font-size: 1.3em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
 .place-price {
   font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
   opacity: 0.7;
 }

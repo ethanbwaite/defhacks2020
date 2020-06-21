@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+
+import Login from './components/Login.js';
+import CardsPage from './CardsPage.js';
+
 import './App.css';
-import CardStack from './components/CardStack.js';
 
 function App() {
+  
   return (
-    <>
-      <header>
-        <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
-      </header>
-      <CardStack />
-      <footer>
-        <p>Swipe left to pass, swipe right to eat!</p>
-      </footer>
-    </>
+    <div>
+      <Login />
+      <Router>
+        <Switch>
+          <Route path="/" component={CardsPage} />
+        </Switch>
+      </Router>
+    </div>
   );
+  
 }
 
 export default App;
