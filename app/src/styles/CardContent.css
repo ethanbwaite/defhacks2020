@@ -1,0 +1,31 @@
+.card-content {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
+
+.place-name {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.name-line {
+  color: grey;
+  width: 100%;
+}
+
+.place-address {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+.place-rating {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+.place-price {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
