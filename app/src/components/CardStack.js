@@ -5,6 +5,7 @@ import '../styles/CardStack.css'
 
 import ResultAnimation from './ResultAnimation.js';
 import CardContent from './CardContent.js';
+import FinalList from './FinalList';
 
 function CardStack(props) {
   const [placeIndex, setPlaceIndex] = useState(0)// the index in the list of nearby places to show on the current card
@@ -31,8 +32,6 @@ function CardStack(props) {
           setDislikedPlaces(prev => prev.concat(props.places[placeIndex]));
         }
         setTimeout(() => {
-
-
           // Reset
           resetCardStack();
         }, 600)
@@ -53,6 +52,8 @@ function CardStack(props) {
       setPlaceIndex(prevPlaceIndex => prevPlaceIndex+1)
     } else {
       //Don't reset, done swiping
+      setShowFinalList(true);
+      setVerdict(0);
       console.log(likedPlaces.length + " places saved")
     }
   }
@@ -77,6 +78,7 @@ function CardStack(props) {
     <>
       <div className="card-container">
         {getNextCard()}
+        <FinalList places={likedPlaces} show={showFinalList} />
         <ResultAnimation liked={verdict === 1 ? "true" : verdict === -1 ? "false" : ""} />
       </div>
     </>

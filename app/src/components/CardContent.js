@@ -15,7 +15,7 @@ function CardContent(props) {
 
   return (
     <div className="card-content">
-      <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/>
+      {props.imageKey ? <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/> : null}
       <text className="place-name">{props.name}</text>
       <text className="place-address">{props.address}</text>
       <text className="place-rating">{stars} {props.reviews || 0} Reviews</text>
