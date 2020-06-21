@@ -4,10 +4,15 @@ import CardStack from './components/CardStack.js';
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <header>
+        <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
+      </header>
       <CardStack />
-    </div>
-    
+      <footer>
+        <p>Swipe left to pass, swipe right to eat!</p>
+      </footer>
+    </>
   );
 }
 

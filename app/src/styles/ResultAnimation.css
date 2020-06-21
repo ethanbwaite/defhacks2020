@@ -1,19 +1,19 @@
 .result {
   font-size: 10em;
-  position: absolute;
-  margin: auto;
-  text-align: center;
   z-index: -1;
-  animation: blip;
-  animation-duration: 500ms;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
+  animation: blip 400ms ease-out;
 }
 
 @keyframes blip {
-  0% {transform: scale(1);}
-  25% {transform: scale(0.8);}
-  50% {transform: scale(1.2);}
-  100% {transform: scale(1);}
+  0% { transform: scale(0) }
+  25% { transform: scale(1.2) }
+  100% { transform: scale(1) }
 }
 
+.heart {
+  color: magenta;
+}
+
+.cross {
+  color: orangered;
+}
