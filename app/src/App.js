@@ -7,18 +7,15 @@ import CardsPage from './CardsPage.js';
 import './App.css';
 
 function App() {
-  
+
   return (
-    <div>
-      <Login />
-      <Router>
-        <Switch>
-          <Route path="/" component={CardsPage} />
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" component={CardsPage} />
+      </Switch>
+    </Router>
   );
-  
+
 }
 
 export default App;

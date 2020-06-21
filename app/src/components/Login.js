@@ -3,9 +3,7 @@ import '../styles/Login.css'
 
 function Login(props) {
   return (
-    <div className="header">
-      <button className="login-button">Login</button>
-    </div>
+    <button>Log In</button>
   )
 }
 
