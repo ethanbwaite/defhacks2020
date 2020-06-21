@@ -1,1 +1,8 @@
-gcloud compute --project=defhacks2010 instances create defhacks-backend --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=62386811955-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/cloud-platform --tags=http-server,https-server --image=debian-9-stretch-v20200420 --image-project=debian-cloud --boot-disk-size=20GB --boot-disk-type=pd-standard --boot-disk-device-name=senior-proj-prod --reservation-affinity=any
+sudo service nginx start
+rm -rf ~/prod
+rm -rf ~/defhacks2020
+mkdir prod
+git clone --single-branch --branch backend_eric git@github.com:warthogs32/defhacks2020.git
+cp -r defhacks2020/backend/* ~/prod
+sudo service nginx start
+python3.7 ~/prod/UserController.py
