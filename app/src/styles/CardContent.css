@@ -1,31 +1,40 @@
 .card-content {
   display: flex;
   flex-direction: column;
-  margin: 1em;
 }
 
 .place-name {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 2em;
   font-weight: bold;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
-.name-line {
-  color: grey;
-  width: 100%;
+.place-photo {
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+  margin: 0%;
+  max-height: 400px;
 }
 
 .place-address {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
 .place-rating {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
 .place-price {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1em;
+  margin-left: 2%;
+  margin-top: 2%;
 }

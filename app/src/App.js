@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+
+import Login from './components/Login.js';
+import CardsPage from './CardsPage.js';
+
 import './App.css';
-import CardStack from './components/CardStack.js';
 
 function App() {
+  
   return (
-    <div className="App">
-      <CardStack />
+    <div>
+      <Login />
+      <Router>
+        <Switch>
+          <Route path="/" component={CardsPage} />
+        </Switch>
+      </Router>
     </div>
-    
   );
+  
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSpring, animated, interpolate } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 import '../styles/CardStack.css'
@@ -6,10 +6,13 @@ import '../styles/CardStack.css'
 import ResultAnimation from './ResultAnimation.js';
 import CardContent from './CardContent.js';
 
-function CardStack() {
-  const [position, setPosition] = useState(0)
+function CardStack(props) {
+  const [placeIndex, setPlaceIndex] = useState(0)// the index in the list of nearby places to show on the current card
   const [swiped, setSwiped] = useState(false);
-  const [verdict, setVerdict] = useState(0); //1 is liked the choice, -1 is did not like
+  const [verdict, setVerdict] = useState(0); // 1 is liked the choice, -1 is did not like
+  const [likedPlaces, setLikedPlaces] = useState([])
+  const [dislikedPlaces, setDislikedPlaces] = useState([])
+  const [showFinalList, setShowFinalList] = useState(false);
   const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }))
   const bind = useDrag(({ offset: [x, y], direction: [xDir], velocity }) => {
     const trigger = velocity > 1;
@@ -20,6 +23,11 @@ function CardStack() {
       if (verdict === 0) {
         setVerdict(dir); 
         //Decision finalized, do business work here
+        if (dir === 1) {
+          setLikedPlaces(prev => prev.concat(props.places[placeIndex]));
+        } else if (dir === -1) {
+          setDislikedPlaces(prev => prev.concat(props.places[placeIndex]));
+        }
         setTimeout(() => {
           resetCardStack()
         }, 600)
@@ -33,17 +41,38 @@ function CardStack() {
   })
 
   function resetCardStack() {
-    set({x:0, y:0});
-    setVerdict(0);
-    setSwiped(false);
+    if (placeIndex < props.places.length-1) {
+      set({x:0, y:0});
+      setVerdict(0);
+      setSwiped(false);
+      setPlaceIndex(prevPlaceIndex => prevPlaceIndex+1)
+    } else {
+      //Don't reset, done swiping
+      console.log(likedPlaces.length + " places saved")
+    }
+  }
+
+  function getNextCard() {
+    if (props.places != null && props.places.length > 0) {
+      return (
+        <animated.div className="card" {...bind()} style={{ x, y }} >
+          <CardContent name={props.places[placeIndex].name} 
+            address={props.places[placeIndex].vicinity} 
+            rating={props.places[placeIndex].rating} 
+            price={props.places[placeIndex].price_level} 
+            reviews={props.places[placeIndex].user_ratings_total}
+            imageKey={props.places[placeIndex].photos[0].photo_reference}/>
+        </animated.div>
+      )
+    }
   }
 
   return (
     <>
-      <animated.div {...bind()} style={{ x, y }} >
-        <CardContent name="Resturaunt Name" address="123 Mission St., San Francisco, 93401" rating="5/5" price="$$$"/>
-      </animated.div>
-      <ResultAnimation liked={verdict === 1 ? "true" : verdict === -1 ? "false" : ""} />
+      <div className="card-container">
+        {getNextCard()}
+        <ResultAnimation liked={verdict === 1 ? "true" : verdict === -1 ? "false" : ""} />
+      </div>
     </>
   );
 }
