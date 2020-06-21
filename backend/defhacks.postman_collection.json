@@ -268,9 +268,9 @@
 	],
 	"variable": [
 		{
-			"id": "2e43ab7f-c5ef-4349-89a1-b7b801910170",
+			"id": "686e92c6-d3a2-404c-a6e3-7725abf7859f",
 			"key": "url",
-			"value": "localhost:5000",
+			"value": "backend.meetyoureat.online",
 			"type": "string"
 		}
 	],
