@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "541eeb58-4db6-425e-9a8d-2a0779401036",
+		"name": "defhacks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostNewUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Phone\":\"215\", \n    \"Left\":[\"ave\", \"vg\"], \n    \"Right\":[\"cmpsmkt\", \"1920\"], \n    \"LastViewedRestaurant\": \"805\", \n    \"Saved\": [\"gus\", \"lincoln\", \"hsd\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByUUID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/id/stLkpMFDORmjaSLONdTA ",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"id",
+						"stLkpMFDORmjaSLONdTA "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByPhone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/phone/444",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"phone",
+						"444"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLastViewedRestaurant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/restaurant/last/000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"last",
+						"000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutUpdateLastViewedRestaurant",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Phone\": \"654\",\n    \"LastViewedRestaurant\": \"buffet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/restaurant/add_last",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"add_last"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllSavedRestaurants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/restaurant/get_all_saved_restaurants/215",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"get_all_saved_restaurants",
+						"215"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SwipeLeft",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Phone\": \"510\",\n    \"Restaurant\": \"jamba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/restaurant/left",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"left"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLeftSwipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/restaurant/get_left_swipes/510",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"get_left_swipes",
+						"510"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SwipeRight",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Phone\": \"215\",\n    \"Restaurant\": \"bk\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/restaurant/right",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"right"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRightSwipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/restaurant/get_right_swipes/215",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"restaurant",
+						"get_right_swipes",
+						"215"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9f8eebf1-d729-41e1-a7c8-3b7eeb57dade",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9e04db40-8102-4c83-a358-0fd0d62a7937",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2e43ab7f-c5ef-4349-89a1-b7b801910170",
+			"key": "url",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

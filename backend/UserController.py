@@ -40,7 +40,7 @@ def GetLastViewedRestaurant(phone):
             return jsonify(False)
 
 @app.route('/restaurant/add_last', methods=['PUT'])
-def PutUpdateLastViewedRestaurant(phone, restaurant):
+def PutUpdateLastViewedRestaurant():
     try:
         UserRepo.UpdateLastViewedRestaurant(request.json["Phone"], request.json["LastViewedRestaurant"])
         return jsonify(True)
