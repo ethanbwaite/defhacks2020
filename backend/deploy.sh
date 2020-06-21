@@ -1,3 +1,5 @@
+curpid=$(pgrep python3)
+kill curpid
 sudo service nginx stop
 rm -rf ~/prod
 rm -rf ~/defhacks2020
