@@ -31,7 +31,8 @@ function CardsPage() {
   }
 
   function getPlaces(pos) {
-    fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=API_KEY`, {mode: 'cors'})
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=API_KEY`, {mode: 'cors'})
       .then((response) => response.json())
       .then((data) => {
         setPlaces(data.results);
@@ -61,7 +62,13 @@ function CardsPage() {
 
   return (
     <div className="cards-page">
+      <header>
+        <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
+      </header>
       <CardStack places={places}/>
+      <footer>
+        <p>Swipe left to pass, swipe right to eat!</p>
+      </footer>
     </div>
     
   );
