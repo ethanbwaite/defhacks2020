@@ -1,0 +1,22 @@
+User
+	-uuid
+	-phone#
+	-last viewed restaurant
+	-saved restaurants
+	-left restaurants
+	-right restaurants
+
+post new user(phone #)
+get all users
+get user by uuid
+get user by phone #
+
+update last viewed restaurant(phone #, restaurant id)
+get last viewed restaurant(phone #)
+
+save restaurant(phone #, restaurant id)
+get all saved restaurants(phone #)
+get saved restaurant(phone #, id)
+
+post left restaurant (phone #, id)
+post right restaurant(phone #, id)

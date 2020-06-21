@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 class UserModel:
     def __init__(self):
     	self.Phone: str = ""

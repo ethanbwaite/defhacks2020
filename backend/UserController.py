@@ -1,45 +1,80 @@
-from flask import Flask, request
-from .documentrepo import Repo
+from flask import Flask, request, jsonify
+from Transformers import *
+from Models import UserModel
+from typing import List, Dict, Tuple
+import UserRepository as UserRepo
 
 app = Flask(__name__)
 
 
 @app.route('/user', methods=['GET', 'POST'])
-def user():
+def User():
     if request.method == "GET":
-        return Repo.get_repo().get_all_users()
+        return jsonify(UserRepo.GetAllUsers())
     elif request.method == "POST":
-        Repo.get_repo().create_user(request.json)
+        user: UserModel = DictToUserTransformer(request.json)
+        try:
+            UserRepo.PostAddNewUser(user)
+            return jsonify(True)
+        except:
+            return jsonify(False)
 
 
+@app.route('/user/id/<string:uid>')
+def GetUserByUUID(uid):
+    return UserToDictTransformer(UserRepo.GetUserByUUID(uid))
 
-@app.route('/user/<string:uid>')
-def get_user(uid):
-    return Repo.get_repo().get_user(uid)
+@app.route('/user/phone/<string:phone>')
+def GetUserByPhone(phone):
+    return UserToDictTransformer(UserRepo.GetUserByPhoneNumber(phone))
 
-
-@app.route('/restaurant/last/<string:uid>', methods=['GET', 'PATCH'])
-def last_restaurant(uid):
+@app.route('/restaurant/last/<string:phone>', methods=['GET'])
+def GetLastViewedRestaurant(phone):
     if request.method == "GET":
-        return Repo.get_repo().get_last_restaurant(uid)
-    elif request.method == "PATCH":
-        Repo.get_repo().change_last_restaurant(uid, request.json)
+        return jsonify(UserRepo.GetLastViewedRestaurant(phone))
+    elif request.method == "PUT":
+        try:
+            UserRepo.UpdateLastViewedRestaurant(request.json["Phone"], request.json["Phone"])
+            return jsonify(True)
+        except:
+            return jsonify(False)
+
+@app.route('/restaurant/add_last', methods=['PUT'])
+def PutUpdateLastViewedRestaurant(phone, restaurant):
+    try:
+        UserRepo.UpdateLastViewedRestaurant(request.json["Phone"], request.json["LastViewedRestaurant"])
+        return jsonify(True)
+    except:
+        return jsonify(False)
+
+@app.route('/restaurant/get_all_saved_restaurants/<string:phone>', methods=['GET'])
+def GetAllSavedRestaurants(phone):
+    return jsonify(UserRepo.GetAllSavedRestaurants(phone))
+
+@app.route('/restaurant/left', methods=['PUT'])
+def PutSwipeLeft():
+    try:
+        UserRepo.SwipeLeft(request.json["Phone"], request.json["Restaurant"])
+        return jsonify(True)
+    except:
+        return jsonify(False)
+
+@app.route('/restaurant/right', methods=['PUT'])
+def PutSwipeRight():
+    try:
+        UserRepo.SwipeRight(request.json["Phone"], request.json["Restaurant"])
+        return jsonify(True)
+    except:
+        return jsonify(False)
+
+@app.route('/restaurant/get_left_swipes/<string:phone>', methods=['GET'])
+def GetLeftSwipes(phone):
+    return jsonify(UserRepo.GetSwipe(phone, "left"))
+
+@app.route('/restaurant/get_right_swipes/<string:phone>', methods=['GET'])
+def GetRightSwipes(phone):
+    return jsonify(UserRepo.GetSwipe(phone, "right"))
 
 
-@app.route('/restaurant/saved/<string:uid>', methods=["GET", "POST", "DELETE"])
-def saved_restaurant():
-    if request.method == "GET":
-        return Repo.get_repo().get_saved_restaurants(uid)
-    elif request.method == "POST":
-        Repo.get_repo().add_saved_restaurant(uid, request.json)
-    elif request.method == "DELETE":
-        Repo.get_repo().delete_save_restaurant(uid, request.json)
-
-@app.route('/left/<string:uid>', methods=["POST"])
-def dislike_restaurant():
-    Repo.get_repo().add_diskliked_restaurant(request.json)
-
-
-@app.route('/right/<string:uid>', methods=["POST"])
-def meh_restaurant():
-    Repo.get_repo().add_meh_restaurant(request.json)
+if __name__ == "__main__":
+    app.run()
