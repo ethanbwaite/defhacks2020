@@ -13,15 +13,17 @@ function CardStack(props) {
   const [likedPlaces, setLikedPlaces] = useState([])
   const [dislikedPlaces, setDislikedPlaces] = useState([])
   const [showFinalList, setShowFinalList] = useState(false);
-  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }))
+  const [{ x, y, rotate }, set] = useSpring(() => ({ x: 0, y: 0, rotate: 0 }))
   const bind = useDrag(({ offset: [x, y], direction: [xDir], velocity }) => {
-    const trigger = velocity > 1;
+    const triggered = velocity > 1;
     const dir = xDir < 0 ? -1 : 1
-    if (trigger || swiped) {
+
+    if (triggered || swiped) {
       x = window.innerWidth * dir;
       setSwiped(true);
       if (verdict === 0) {
-        setVerdict(dir); 
+        setVerdict(dir);
+
         //Decision finalized, do business work here
         if (dir === 1) {
           setLikedPlaces(prev => prev.concat(props.places[placeIndex]));
@@ -29,12 +31,15 @@ function CardStack(props) {
           setDislikedPlaces(prev => prev.concat(props.places[placeIndex]));
         }
         setTimeout(() => {
-          resetCardStack()
+
+
+          // Reset
+          resetCardStack();
         }, 600)
       }
     }
-    set({ x, y })
-    
+
+    set({ x, y, rotate: x * 0.1 })
   }, {
     bounds: { left: swiped ? 0 : -50, right: swiped ? 0 :  50, top: swiped ? 0 :  -25, bottom: swiped ? 0 : 25 },
     rubberband: true,
@@ -42,7 +47,7 @@ function CardStack(props) {
 
   function resetCardStack() {
     if (placeIndex < props.places.length-1) {
-      set({x:0, y:0});
+      set({x:0, y:0, rotate:0});
       setVerdict(0);
       setSwiped(false);
       setPlaceIndex(prevPlaceIndex => prevPlaceIndex+1)
@@ -55,8 +60,9 @@ function CardStack(props) {
   function getNextCard() {
     if (props.places != null && props.places.length > 0) {
       return (
-        <animated.div className="card" {...bind()} style={{ x, y }} >
-          <CardContent name={props.places[placeIndex].name} 
+        <animated.div className="card" {...bind()} style={{ x, y, rotate }} >
+          <CardContent className="content"
+            name={props.places[placeIndex].name} 
             address={props.places[placeIndex].vicinity} 
             rating={props.places[placeIndex].rating} 
             price={props.places[placeIndex].price_level} 

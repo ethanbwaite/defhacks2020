@@ -3,9 +3,9 @@ import '../styles/ResultAnimation.css'
 
 function ResultAnimation(props) {
     if (props.liked === 'true') {
-      return <text role="img" className="result heart">❤️</text>; 
+      return <span role="img" className="result heart">❤️</span>;
     } else if (props.liked === 'false') {
-      return <text role="img" className="result cross">❌</text>;
+      return <span role="img" className="result cross">❌</span>;
     }
     return null;
 }
