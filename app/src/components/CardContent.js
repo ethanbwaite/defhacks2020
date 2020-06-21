@@ -6,7 +6,7 @@ function CardContent({name, rating, reviews, price, address, imageKey}) {
 
   return (
     <div className="card-content">
-      <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/>
+      {props.imageKey ? <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/> : null}
 
       <h2 className="place-name">{name}</h2>
       <hr/>
