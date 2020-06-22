@@ -38,7 +38,7 @@ function FinalList(props) {
   }, [props.show])
 
   if (props.show) {
-    let listOfPlaces = places !== undefined ? places : props.places;
+    let listOfPlaces = /*places !== undefined ? places : */props.places;
     return (
       <>
         <div className="picks-container">
