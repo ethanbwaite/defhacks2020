@@ -9,11 +9,13 @@ import './App.css';
 function App() {
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={CardsPage} />
-      </Switch>
-    </Router>
+    <div>
+      <Router>
+        <Switch>
+          <Route path="/" component={CardsPage} />
+        </Switch>
+      </Router>
+    </div>
   );
 
 }
