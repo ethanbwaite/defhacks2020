@@ -40,9 +40,9 @@ function FinalList(props) {
   if (props.show) {
     let listOfPlaces = places !== undefined ? places : props.places;
     return (
-      <div>
-        <h1>Here are all your picks!</h1>
+      <>
         <div className="picks-container">
+          <h1>Here are all your picks!</h1>
           {listOfPlaces.map((e, i) => {
             return <div className="pick"><CardContent
             name={e.name} 
@@ -52,7 +52,7 @@ function FinalList(props) {
             reviews={e.user_ratings_total}/></div>
           })}
         </div>
-      </div>
+      </>
     )
   }
   return null;

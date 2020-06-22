@@ -5,7 +5,7 @@ import Login from './components/Login.js';
 import Places from "google-places-web";
 
 function CardsPage() {
-  // Places.apiKey = "API_KEY";
+  const API_KEY = "API KEY";
   const [number, setNumber] = useState(0);
   const [pos, setPos] = useState();
   const [places, setPlaces] = useState();
@@ -33,7 +33,7 @@ function CardsPage() {
   function getPlaces(pos) {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     console.log(process.env.REACT_APP_GOOGLE_API_KEY);
-    fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=${process.env.REACT_APP_GOOGLE_API_KEY}`, {mode: 'cors'})
+    fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=${API_KEY}`, {mode: 'cors'})
       .then((response) => response.json())
       .then((data) => {
         setPlaces(data.results);
@@ -95,12 +95,10 @@ function CardsPage() {
     <>
       <header>
         <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
+        <p>Swipe left to pass, swipe right to eat!</p>
         <Login submit={handleLogin} number={number}/>
       </header>
       <CardStack places={places} number={number}/>
-      <footer>
-        <p>Swipe left to pass, swipe right to eat!</p>
-      </footer>
     </>
   );
 }
