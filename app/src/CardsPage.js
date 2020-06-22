@@ -41,19 +41,19 @@ function CardsPage() {
       .catch(function(error) {
         console.log('Request failed', error);
     });
-    // })); 
+    // }));
     // try {
     //   const response = Places.nearbysearch({
     //     location: `${pos.lat},${pos.lng}`, // LatLon delimited by ,
     //     radius: "10000",  // Radius cannot be used if rankBy set to DISTANCE
     //     type: ["restaurant"], // Undefined type will return all types
     //   });
-     
+
     //   const { status, results, next_page_token, html_attributions } = response;
     // } catch (error) {
     //   console.log(error);
     // }
-    
+
   }
   
   function handleLogin(newNumber) {
@@ -91,7 +91,7 @@ function CardsPage() {
   }, []);
 
   return (
-    <div className="cards-page">
+    <>
       <header>
         <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
         <Login submit={handleLogin} number={number}/>
@@ -100,8 +100,7 @@ function CardsPage() {
       <footer>
         <p>Swipe left to pass, swipe right to eat!</p>
       </footer>
-    </div>
-    
+    </>
   );
 }
 

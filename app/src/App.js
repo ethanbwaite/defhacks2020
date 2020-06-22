@@ -7,7 +7,7 @@ import CardsPage from './CardsPage.js';
 import './App.css';
 
 function App() {
-  
+
   return (
     <div>
       <Router>
@@ -17,7 +17,7 @@ function App() {
       </Router>
     </div>
   );
-  
+
 }
 
 export default App;

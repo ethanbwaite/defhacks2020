@@ -1,25 +1,21 @@
 import React, { useState } from 'react'
 import '../styles/CardContent.css'
 
-function CardContent(props) {
-  let stars = ''
-  for (let i=0; i<props.rating; i++) {
-    stars += '⭐';
-  }
-  let dollars = ''
-  for (let i=0; i<props.price; i++) {
-    dollars += '$';
-  }
-  let imageAddress = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${props.imageKey}&key=AIzaSyDRzkag5QmPydb3ipmoYp4p6Ul-dicdGb4`
-
+function CardContent({name, rating, reviews, price, address, imageKey}) {
+  const imageAddress = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${imageKey}&key=AIzaSyDRzkag5QmPydb3ipmoYp4p6Ul-dicdGb4`
 
   return (
     <div className="card-content">
-      {props.imageKey ? <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/> : null}
-      <text className="place-name">{props.name}</text>
-      <text className="place-address">{props.address}</text>
-      <text className="place-rating">{stars} {props.reviews || 0} Reviews</text>
-      <text className="place-price">{dollars}</text>
+      {imageKey ? <img className="place-photo" src={imageAddress} alt="restaurant image" draggable="false"/> : null}
+
+      <h2 className="place-name">{name}</h2>
+      <hr/>
+      <div>
+        <span className="place-rating">{'⭐'.repeat(rating)}</span>
+        <span className="place-reviews">{reviews == 1 ? '1 Review' : `${reviews || 0} Reviews`}</span>
+        <span className="place-price">{'$'.repeat(price)}</span>
+      </div>
+      <span className="place-address">{address}</span>
     </div>
   )
 }
