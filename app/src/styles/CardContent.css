@@ -29,9 +29,10 @@ hr {
 }
 .place-photo {
   object-fit: cover;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 8px;
   margin: 0%;
-  max-height: 400px;
+  max-height: 300px;
+  max-width: 100%;
 }
 
 .place-address {

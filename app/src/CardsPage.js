@@ -32,7 +32,8 @@ function CardsPage() {
 
   function getPlaces(pos) {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=API_KEY`, {mode: 'cors'})
+    console.log(process.env.REACT_APP_GOOGLE_API_KEY);
+    fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${pos.lat},${pos.lng}&radius=10000&type=restaurant&key=${process.env.REACT_APP_GOOGLE_API_KEY}`, {mode: 'cors'})
       .then((response) => response.json())
       .then((data) => {
         setPlaces(data.results);
