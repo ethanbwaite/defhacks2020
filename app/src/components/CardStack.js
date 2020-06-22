@@ -18,7 +18,6 @@ function CardStack(props) {
   const bind = useDrag(({ offset: [x, y], direction: [xDir], velocity }) => {
     const triggered = velocity > 1;
     const dir = xDir < 0 ? -1 : 1
-
     if (triggered || swiped) {
       x = window.innerWidth * dir;
       setSwiped(true);
@@ -26,6 +25,7 @@ function CardStack(props) {
         setVerdict(dir);
 
         //Decision finalized, do business work here
+        putPlace(props.places[placeIndex],dir);
         if (dir === 1) {
           setLikedPlaces(prev => prev.concat(props.places[placeIndex]));
         } else if (dir === -1) {
@@ -58,6 +58,38 @@ function CardStack(props) {
     }
   }
 
+  function putPlace(place, direction) {
+    const newPostData = {
+      Phone: props.number,
+      Restaurant: place
+    };
+    const request = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', },
+      body: JSON.stringify(newPostData),
+    };
+    let url;
+    if (direction === 1) {
+      url = 'http://backend.meetyoureat.online/restaurant/right'
+    } else {
+      url = 'http://backend.meetyoureat.online/restaurant/left'
+    }
+    fetch(url, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(() => {
+        console.log('Swipe posted to ' + props.number);
+      })
+      .catch(() => {
+        console.log('Swipe failed');
+      });
+  }
+
+
   function getNextCard() {
     if (props.places != null && props.places.length > 0) {
       return (
@@ -78,7 +110,7 @@ function CardStack(props) {
     <>
       <div className="card-container">
         {getNextCard()}
-        <FinalList places={likedPlaces} show={showFinalList} />
+        <FinalList places={likedPlaces} show={showFinalList} number={props.number}/>
         <ResultAnimation liked={verdict === 1 ? "true" : verdict === -1 ? "false" : ""} />
       </div>
     </>

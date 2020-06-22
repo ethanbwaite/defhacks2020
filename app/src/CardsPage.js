@@ -6,7 +6,7 @@ import Places from "google-places-web";
 
 function CardsPage() {
   // Places.apiKey = "API_KEY";
-
+  const [number, setNumber] = useState(0);
   const [pos, setPos] = useState();
   const [places, setPlaces] = useState();
 
@@ -56,6 +56,36 @@ function CardsPage() {
     
   }
   
+  function handleLogin(newNumber) {
+    setNumber(newNumber);
+    const newPostData = {
+      Phone: newNumber,
+      Left: [], 
+      Right:[], 
+      LastViewedRestaurant: "", 
+      Saved: []
+    };
+    const request = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', },
+      body: JSON.stringify(newPostData),
+    };
+    let url = 'http://backend.meetyoureat.online/user'
+    fetch(url, request)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then(() => {
+        console.log('New User Posted ' + newNumber);
+      })
+      .catch(() => {
+        console.log('New User Failed');
+      });
+  }
+
   useEffect(() => {
     getLocation();
   }, []);
@@ -64,8 +94,9 @@ function CardsPage() {
     <div className="cards-page">
       <header>
         <h1 id="logo" icon="🍴"><b>Meet</b>Your<b>Eat</b></h1>
+        <Login submit={handleLogin} number={number}/>
       </header>
-      <CardStack places={places}/>
+      <CardStack places={places} number={number}/>
       <footer>
         <p>Swipe left to pass, swipe right to eat!</p>
       </footer>

@@ -10,7 +10,6 @@ function App() {
   
   return (
     <div>
-      <Login />
       <Router>
         <Switch>
           <Route path="/" component={CardsPage} />
